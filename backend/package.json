@@ -1,0 +1,17 @@
+{
+  "name": "backned",
+  "version": "1.0.0",
+  "description": "toto je moj pokus o backend",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
