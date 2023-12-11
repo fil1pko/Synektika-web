@@ -1,4 +1,5 @@
 const express = require("express");
+const mysql = require("./database/mysql_connect");
 const PORT = process.env.PORT || 5001;
 const app = express();
 const cors = require("cors");   
@@ -8,8 +9,8 @@ const cors = require("cors");
 */
 app.use(express.json({extended:false}));
 
-app.get("/", (request, response) => {
-    response.send("running");
+app.get("/", (request, res) => {
+    res.sendFile(__dirname + '/views/login.html');
 });
 
 app.listen(PORT, ()=>{
