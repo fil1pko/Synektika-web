@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div id="dashboardContent">Načítavam obsah...</div>
+
+    <script>
+        function loadDashboardContent() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/';
+                return;
+            }
+
+            fetch('/dashboardcontent', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Nie je možné načítať dashboard');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                document.getElementById('dashboardContent').innerHTML = data.html;
+            })
+            .catch(error => {
+                console.error('Chyba pri načítaní dashboardu:', error);
+                document.getElementById('dashboardContent').innerHTML = 'Chyba pri načítaní obsahu.';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDashboardContent);
+    </script>
+</body>
+</html>
