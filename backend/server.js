@@ -1,6 +1,6 @@
 const express = require("express");
 const mysql = require("./database/mysql_connect");
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5002;
 const app = express();
 const cors = require("cors");   
 
@@ -8,6 +8,7 @@ const postRegister = require("./routes/POST/Register");
 const postLogin = require("./routes/POST/Login");
 const dashboard = require("./routes/GET/Dashboard");
 const verifyToken = require('./middleware/verifyToken');
+const saveContent = require("./routes/POST/SaveContent");
 /*
 * MIDDLEWARE, povolenie prijmat json z frontendu
 */
@@ -31,6 +32,9 @@ app.get("/dashboard", (req, res) => {
 app.use('/login', postLogin);
 app.use('/register', postRegister);
 app.use('/dashboardcontent', verifyToken, dashboard);
+app.use('/savecontent', verifyToken, saveContent);
+
+
 
 
 app.listen(PORT, ()=>{
